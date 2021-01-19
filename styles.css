@@ -24,6 +24,7 @@ footer {
 main {
     overflow: auto;
     display: flex;
+    flex-flow: column;
 
     background: rgba(250,250,250);
     display: flex;
@@ -32,9 +33,11 @@ main {
 .card {
     width: 80%;
     margin: auto;
-
-    background: #ddd;
     padding: 1rem;
+}
+
+.card-bg {
+    background: #ddd;
 }
 
 .huge-headline {
