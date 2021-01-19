@@ -1,4 +1,4 @@
-class AltHeadline extends HTMLElement {
+class FadingHOne extends HTMLElement {
     constructor() {
       // Always call super first in constructor
       const self = super();
@@ -8,7 +8,7 @@ class AltHeadline extends HTMLElement {
   
       // Create spans
       const wrapper = document.createElement('span');
-      wrapper.setAttribute('class', 'huge-headline');
+      wrapper.setAttribute('class', 'fading-h1');
   
       // Create some CSS to apply to the shadow dom
       const style = document.createElement('style');
@@ -17,7 +17,7 @@ class AltHeadline extends HTMLElement {
       wrapper.textContent = self.innerHTML;
 
       style.textContent = `
-        .huge-headline {
+        .fading-h1 {
             opacity:0.2;
 
             font-size:40px;
@@ -26,7 +26,7 @@ class AltHeadline extends HTMLElement {
             transform-origin: 0 0;
         }
 
-        .huge-headline:hover {
+        .fading-h1:hover {
             opacity: 1;
         }
       `;
@@ -38,4 +38,4 @@ class AltHeadline extends HTMLElement {
     }
   }
 
-  customElements.define('huge-headline', AltHeadline);
+  customElements.define('fading-h1', FadingHOne);
