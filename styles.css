@@ -1,0 +1,42 @@
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 12vh 1fr 14vh;
+
+    height: 100vh;
+    width: 100%;
+    margin:0;
+}
+
+header,
+footer {
+    background: #ddd;
+}
+
+main {
+    overflow: auto;
+    display: flex;
+
+    background: rgba(250,250,250);
+    display: flex;
+}
+
+.card {
+    width: 80%;
+    margin: auto;
+
+    background: #ddd;
+    padding: 1rem;
+}
+
+.huge-headline {
+    background: yellow;
+}
