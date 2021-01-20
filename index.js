@@ -4,3 +4,9 @@ import ExpandingList from './components/ExpandingList.js';
 
 customElements.define('fading-h1', FadingHeadline);
 customElements.define('ul-expanding', ExpandingList);
+
+const select = document.querySelector("ul-expanding");
+const button = document.querySelector(".clear-button");
+button.addEventListener("click", () => {
+    select.clearDisplay()
+})

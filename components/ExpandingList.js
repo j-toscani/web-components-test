@@ -13,6 +13,8 @@ export default class ExpandingList extends HTMLElement {
       const display = document.createElement("label");
       display.setAttribute("class", "list-display");
 
+      this.display = display;
+
       const text = this.getAttribute('data-display');
       display.textContent = text || "Display";
 
@@ -21,6 +23,9 @@ export default class ExpandingList extends HTMLElement {
 
       items.forEach(item => {
           item.setAttribute("class", "list-element")
+          item.addEventListener("click", () => {
+            display.textContent = item.textContent;
+          })
           dropdown.appendChild(item)
         })
       wrapper.appendChild(display);
@@ -48,7 +53,7 @@ export default class ExpandingList extends HTMLElement {
         }
 
         .list-dropdown {
-            width: calc(100% - 2px);
+            width: calc(100% - 1px);
             position: absolute;
             top: 100%;
             left:0;
@@ -71,5 +76,9 @@ export default class ExpandingList extends HTMLElement {
       shadow.appendChild(style);
       console.log(style.isConnected);
       shadow.appendChild(wrapper);
+    }
+    clearDisplay() {
+      console.log(this)
+      this.display.textContent = "Display";
     }
   }
