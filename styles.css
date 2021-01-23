@@ -43,3 +43,25 @@ main {
 .huge-headline {
     background: yellow;
 }
+
+.list-wrapper {
+    position: relative;
+}
+
+.list-dropdown {
+    width: calc(100% - 2px);
+    position: absolute;
+    top: 100%;
+    left:0;
+    
+    transform: scaleY(0);
+    opacity:0;
+    transform-origin: top;
+
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.list-wrapper:hover > .list-dropdown {
+    transform: scaleY(1);
+    opacity: 1;
+}
