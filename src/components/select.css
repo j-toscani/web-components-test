@@ -5,8 +5,16 @@
     --dsp-padding: var(--padding-s, 0.25rem) var(--padding-m, 0.5rem);
 }
 
+.list-wrapper:hover ul {
+    transform: scaleY(1);
+}
+
 ul {
     position: absolute;
+
+    top:100%;
+    left:0;
+
     display: flex;
     flex-flow: column nowrap;
 
@@ -16,11 +24,13 @@ ul {
     list-style: none;
     transform-origin: top;
 
-    transform: scale(0);
+    transform: scaleY(0);
+    transition: transform 0.3s ease-out;
 }
 
 .list-display,
 li {
+    display: block;
     white-space: nowrap;
     padding: var(--dsp-padding);
 }

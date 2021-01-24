@@ -1,20 +1,12 @@
 "use strict"
-import FadingHeadline from './components/FadingHeadline.js';
-import DynamicList from './components/DynamicList.js';
+import FadingHeadline from './src/dummy-components/FadingHeadline.js';
+import Select from './src/components/Select.js';
 
+customElements.define('wc-select', Select);
 customElements.define('fading-h1', FadingHeadline);
-customElements.define('ul-dynamic', DynamicList);
 
 const button = document.querySelector("button")
-const list = document.querySelector("ul-dynamic")
+const list = document.querySelector("wc-select")
 
-button.addEventListener("click", () => {
-    let items = [1];
+list.elements = [1,2,3];
 
-    if (Array.isArray(list.items)) {
-        items = [...list.items];
-        items.push(list.items.length + 1)
-    }
-
-    list.setItems(items);
-})

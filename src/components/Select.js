@@ -1,4 +1,4 @@
-class Select extends HTMLElement {
+export default class Select extends HTMLElement {
   get elements() {
     return this.dropdown.querySelectorAll('li');
   }
@@ -31,8 +31,12 @@ class Select extends HTMLElement {
     });
 
     list.forEach((li) => {
-      display.appendChild(li);
+      this.dropdown.appendChild(li);
     });
+
+    this.connectedCallback();
+
+    console.log(this);
   }
 
   get value() {
@@ -47,13 +51,13 @@ class Select extends HTMLElement {
     super();
 
     // Set default value for options Object
-    const { data = [], dspValueGetter = (value) => value, keyGetter = null } = options;
+    const { data = [], dspValueGetter = (value) => value, keyGetter = (value) => value } = options;
 
     this.attachShadow({ mode: "open" });
 
     this.stylesheet = document.createElement("link");
     this.stylesheet.setAttribute("rel", "stylesheet");
-    this.stylesheet.setAttribute("href", "select.css");
+    this.stylesheet.setAttribute("href", "/src/components/select.css");
 
     this.data = data;
     this.chosen = null;
@@ -69,12 +73,17 @@ class Select extends HTMLElement {
     this.dropdown = document.createElement("ul");
     this.dropdown.setAttribute("class", "list-dropdown");
 
-    this.dropdown.setAttribute("class", "list-wrapper");
+    this.wrapper = document.createElement('div');
+    this.wrapper.setAttribute("class", "list-wrapper");
 
-    this.shadowRoot.append(this.display);
-    this.shadowRoot.append(this.dropdown);
+    this.wrapper.appendChild(this.stylesheet);
+    this.wrapper.appendChild(this.display);
+    this.wrapper.appendChild(this.dropdown);
+    this.shadowRoot.append(this.wrapper);
 
-    this.display.textContent = this.dspValueGetter(this.value);
+    if (this.data) {
+        this.display.textContent = this.data[0] || "Display";
+    }
   }
 
   connectedCallback() {
