@@ -30,6 +30,7 @@ export default class Select extends HTMLElement {
     this.display = document.createElement("div");
     this.display.setAttribute("class", "list-display");
 
+
     this.display.textContent = "Display";
 
     this.dropdown = document.createElement("ul");
@@ -47,12 +48,20 @@ export default class Select extends HTMLElement {
 
   connectedCallback() {
     this.elements.forEach(element => element.addEventListener("click", this.onClick))
+    this.display.addEventListener("mouseenter", this.openList)
+    this.addEventListener("mouseleave", this.closeList)
   }
   onClick = (event) => {
     this.display.textContent = event.target.textContent
     this.wrapper.setAttribute("value", event.target.textContent);
+    this.closeList()
   };
-  
+  openList = () => {
+    this.dropdown.classList.add("open")
+  }
+  closeList = () => {
+    this.dropdown.classList.remove("open")
+  }
   disconnectedCallback() {
     if (this.elements && this.elements.length > 0) {
       this.elements.forEach(element => element.removeEventListener("click", this.onClick))

@@ -1,16 +1,16 @@
 .list-wrapper {
   position: relative;
-  width: fit-content;
 
   --dsp-padding: var(--padding-s, 0.25rem) var(--padding-m, 0.5rem);
 }
 
 ul {
   position: absolute;
-
+  width: calc(100% - 1px);
   top: 100%;
   left: 0;
-
+  border: 1px solid black;
+  border-top: none;
   display: flex;
   flex-flow: column nowrap;
 
@@ -24,8 +24,12 @@ ul {
   transition: transform 0.3s ease-out;
 }
 
-.list-wrapper:hover ul {
+ul.open {
   transform: scaleY(1);
+}
+
+.list-display {
+  border: 1px solid black;
 }
 
 .list-display,
@@ -33,4 +37,8 @@ li {
   display: block;
   white-space: nowrap;
   padding: var(--dsp-padding);
+}
+
+li:hover {
+  background: lightgray;
 }
