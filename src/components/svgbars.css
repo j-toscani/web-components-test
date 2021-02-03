@@ -1,0 +1,32 @@
+@keyframes grow {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+.bar {
+    fill: green;
+    opacity: 0.8;
+
+    transition: opacity 0.3s ease-out;
+}
+
+rect {
+    transform: scaleX(0);
+}
+
+.bar:hover {
+    opacity: 1;
+}
+
+text {
+    fill: rgba(0,0,0,0.85);
+}
+
+.bar rect {
+    transform-origin: left;
+    animation: grow 1s ease-out 1 normal forwards;
+}
