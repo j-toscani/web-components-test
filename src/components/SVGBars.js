@@ -20,7 +20,7 @@ export default class SVGBars extends HTMLElement {
     wrapper.appendChild(this.svg);
     this.shadowRoot.appendChild(wrapper);
   }
-  rect = (height, width, y) => {
+  createRect = (height, width, y) => {
     const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     rect.setAttributeNS(null, "width", width);
     rect.setAttributeNS(null, "height", height);
@@ -28,7 +28,7 @@ export default class SVGBars extends HTMLElement {
 
     return rect;
   };
-  text = (y, x, _text) => {
+  createText = (y, x, _text) => {
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
     text.setAttributeNS(null, "x", x);
     text.setAttributeNS(null, "y", y);
@@ -37,28 +37,43 @@ export default class SVGBars extends HTMLElement {
     text.textContent = _text;
     return text;
   };
-  g = () => {
+  createGroup = () => {
     const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     return g
   };
-  chart = (entries = [10,20,55,30,110]) => {
+  createBarChart = (entries = [10,20,55,30,110], options = {gap = 5}) => {
     const barHeight = 20;
     let y = 0;
-    let gap = 5;
 
     const elements = entries.map(entry => {
-      const bar = this.bar(entry, barHeight, y)
+      const bar = this.createBar(entry, barHeight, y)
       y += barHeight + gap;
       return bar
     })
 
     elements.forEach(element => this.svg.appendChild(element));
 
+  };
+  createLine = (points, options = {width: 3, step: 20}) => {
+    const {step, width} = options;
+    const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+
+    let x = 0;
+    const coordinates = points.map((point) => { 
+      const coordinate = `${x}, ${point} `;
+      x += step; 
+      return coordinate
+    }).join(" ");
+
+    polyline.setAttributeNS(null, "points", coordinates);
+    polyline.setAttributeNS(null, "width", width);
+
+    return polyline;
   }
-  bar = (entry, barHeight, y) => {
-    const rect = this.rect(barHeight, entry, y);
-    const text = this.text(y + barHeight / 2, entry + barHeight / 2, entry);
-    const g = this.g();
+  createBar = (entry, barHeight, y) => {
+    const rect = this.createRect(barHeight, entry, y);
+    const text = this.createText(y + barHeight / 2, entry + barHeight / 2, entry);
+    const g = this.createGroup();
 
       g.appendChild(rect);
       g.appendChild(text);
